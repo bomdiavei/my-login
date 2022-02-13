@@ -1,4 +1,9 @@
+// 2:39
+
 import { Router } from 'express'
+
+import auth from './middlewares/auth'
+import SessionsController from './controllers/SessionsController'
 
 import HelloController from './controllers/HelloController'
 import UsersController from './controllers/UsersController'
@@ -6,7 +11,10 @@ import RepositoriesController from './controllers/RepositoriesController'
 
 const routes = new Router()
 
+routes.post('/sessions', SessionsController.create)
 routes.get('/hello', HelloController.index)
+
+routes.use(auth)
 
 routes.get('/users', UsersController.index)
 routes.get('/users/:id', UsersController.show)
